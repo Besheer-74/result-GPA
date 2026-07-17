@@ -9,69 +9,91 @@ class OverallResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      decoration: BoxDecoration(
-        color: ColorsStyle.darkBlueColor.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Overall result',
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.white.withOpacity(0.65),
-            ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isCompact = constraints.maxWidth < 360;
+        final spacing = 12.0;
+        final itemWidth = isCompact
+            ? (constraints.maxWidth - spacing) / 2
+            : (constraints.maxWidth - (spacing * 2)) / 3;
+
+        return Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: isCompact ? 16 : 20,
+            vertical: isCompact ? 14 : 16,
           ),
-          const SizedBox(height: 12),
-          Row(
+          decoration: BoxDecoration(
+            color: ColorsStyle.darkBlueColor.withOpacity(0.15),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _statBlock(
-                '${GradeCalculator.overallGpa(result).toStringAsFixed(2)}',
-                'GPA',
-              ),
-              _statBlock(
-                GradeCalculator.overallLetter(
-                  GradeCalculator.overallGpa(result),
+              Text(
+                'Overall result',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.white.withOpacity(0.65),
                 ),
-                'Grade',
               ),
-              _statBlock(
-                '${result.semester1.totalCredits + result.semester2.totalCredits}',
-                'Credits',
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: spacing,
+                runSpacing: 14,
+                children: [
+                  SizedBox(
+                    width: itemWidth,
+                    child: _statBlock(
+                      '${GradeCalculator.overallGpa(result).toStringAsFixed(2)}',
+                      'GPA',
+                    ),
+                  ),
+                  SizedBox(
+                    width: itemWidth,
+                    child: _statBlock(
+                      GradeCalculator.overallLetter(
+                        GradeCalculator.overallGpa(result),
+                      ),
+                      'Grade',
+                    ),
+                  ),
+                  SizedBox(
+                    width: itemWidth,
+                    child: _statBlock(
+                      '${result.semester1.totalCredits + result.semester2.totalCredits}',
+                      'Credits',
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   Widget _statBlock(String value, String label) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: ColorsStyle.neoMintColor,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: ColorsStyle.neoMintColor,
           ),
-          const SizedBox(height: 2),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.white.withOpacity(0.55),
-            ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.white.withOpacity(0.55),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

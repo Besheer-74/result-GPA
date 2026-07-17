@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:results/model/semster.dart';
 import 'package:results/model/subject.dart';
-import 'package:results/view/result.dart';
 import 'package:results/view/widgets/subject_details_sheet.dart';
 import 'package:results/view/widgets/subject_grid_card.dart';
 

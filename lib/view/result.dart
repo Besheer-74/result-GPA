@@ -21,20 +21,24 @@ class _ResultScreenState extends State<ResultScreen> {
   Subject? _selectedSubject;
 
   /// Simple responsive breakpoints.
-  /// < 600  : phone
-  /// 600-1000: tablet
-  /// > 1000  : desktop/web
+  /// < 430   : small phone
+  /// 430-760 : phone
+  /// 760-1100: tablet
+  /// > 1100  : desktop/web
   int _columnsForWidth(double width) {
-    if (width < 600) return 2;
-    if (width < 1000) return 3;
+    if (width < 430) return 1;
+    if (width < 760) return 2;
+    if (width < 1100) return 3;
     return 4;
   }
 
   double _aspectRatioForColumns(int columns) {
     // Narrower columns need a taller card so text doesn't clip.
     switch (columns) {
+      case 1:
+        return 1.75;
       case 2:
-        return 0.90;
+        return 0.82;
       case 3:
         return 0.95;
       default:
@@ -56,6 +60,7 @@ class _ResultScreenState extends State<ResultScreen> {
           builder: (context, constraints) {
             final columns = _columnsForWidth(constraints.maxWidth);
             final horizontalPadding = constraints.maxWidth < 600 ? 16.0 : 24.0;
+            final verticalSpacing = constraints.maxWidth < 430 ? 16.0 : 20.0;
 
             return Align(
               // FIX: was `Center`, which also centers vertically and leaves
@@ -77,9 +82,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         StudentInfoCard(student: student!),
-                        const SizedBox(height: 20),
+                        SizedBox(height: verticalSpacing),
                         OverallResultCard(result: result!),
-                        const SizedBox(height: 20),
+                        SizedBox(height: verticalSpacing),
                         SemesterCard(
                           semester: result.semester2,
                           columns: columns,
@@ -92,7 +97,7 @@ class _ResultScreenState extends State<ResultScreen> {
                             });
                           },
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: verticalSpacing),
                         SemesterCard(
                           semester: result.semester1,
                           columns: columns,
