@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '../controller/result_controller.dart';
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
         : (isLargeScreen ? 1.8 : 1.4);
 
     return Scaffold(
-      backgroundColor: ColorsStyle.corbeauColor,
+      backgroundColor: ColorsStyle.blackBackgroundColor,
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
@@ -253,6 +254,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 20),
+                        Center(child: _buildPoweredByOro()),
                       ],
                     ),
                   );
@@ -261,6 +264,20 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildPoweredByOro() {
+    return SizedBox(
+      height: 25,
+      width: 115,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          SvgPicture.asset('assets/images/oro_logo.svg', width: 41, height: 16),
+        ],
       ),
     );
   }

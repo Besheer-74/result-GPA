@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             },
 
             debugShowCheckedModeBanner: false,
-            title: 'Result Demo',
+            title: 'Results',
             theme: ThemeData(
               colorScheme: .fromSeed(seedColor: Colors.deepPurple),
             ),

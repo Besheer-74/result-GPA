@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../controller/result_controller.dart';
 import '../core/color_style.dart';
@@ -104,6 +105,8 @@ class _ResultScreenState extends State<ResultScreen> {
                             });
                           },
                         ),
+                        const SizedBox(height: 15),
+                        Center(child: _buildPoweredByOro()),
                       ],
                     ),
                   ),
@@ -112,6 +115,20 @@ class _ResultScreenState extends State<ResultScreen> {
             );
           },
         ),
+      ),
+    );
+  }
+
+  Widget _buildPoweredByOro() {
+    return SizedBox(
+      height: 25,
+      width: 115,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          SvgPicture.asset('assets/images/oro_logo.svg', width: 41, height: 16),
+        ],
       ),
     );
   }

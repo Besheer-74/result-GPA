@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../model/result.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://127.0.0.1:8000';
+  static const String baseUrl = 'https://web-production-0d8ba.up.railway.app';
   Future<Result> fetchresult({
     required String studentCode,
     required String nationalId,
