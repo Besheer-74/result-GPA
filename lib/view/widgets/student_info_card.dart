@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:results/core/color_style.dart';
 import 'package:results/model/student.dart';
-import 'package:results/view/result.dart';
 
 class StudentInfoCard extends StatelessWidget {
   final Student student;

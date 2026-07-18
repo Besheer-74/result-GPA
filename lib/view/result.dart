@@ -21,21 +21,35 @@ class _ResultScreenState extends State<ResultScreen> {
   Subject? _selectedSubject;
 
   /// Simple responsive breakpoints.
-  /// < 600  : phone
-  /// 600-1000: tablet
-  /// > 1000  : desktop/web
+  /// < 430   : small phone
+  /// 430-760 : phone
+  /// 760-1100: tablet
+  /// > 1100  : desktop/web
   int _columnsForWidth(double width) {
+<<<<<<< HEAD
     const minCardWidth = 180.0;
 
     return (width / minCardWidth).floor().clamp(1, 4);
+=======
+    if (width < 430) return 1;
+    if (width < 760) return 2;
+    if (width < 1100) return 3;
+    return 4;
+>>>>>>> 8abb2855b4ce7eb2844cf516d8c53a9c243f6a7e
   }
 
   double _aspectRatioForColumns(int columns) {
     switch (columns) {
       case 1:
+<<<<<<< HEAD
         return 2.0; // wide card
       case 2:
         return 0.75;
+=======
+        return 1.75;
+      case 2:
+        return 0.82;
+>>>>>>> 8abb2855b4ce7eb2844cf516d8c53a9c243f6a7e
       case 3:
         return 0.85;
       default:
@@ -57,6 +71,7 @@ class _ResultScreenState extends State<ResultScreen> {
           builder: (context, constraints) {
             final columns = _columnsForWidth(constraints.maxWidth);
             final horizontalPadding = constraints.maxWidth < 600 ? 16.0 : 24.0;
+            final verticalSpacing = constraints.maxWidth < 430 ? 16.0 : 20.0;
 
             return Align(
               // FIX: was `Center`, which also centers vertically and leaves
@@ -78,9 +93,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         StudentInfoCard(student: student!),
-                        const SizedBox(height: 20),
+                        SizedBox(height: verticalSpacing),
                         OverallResultCard(result: result!),
-                        const SizedBox(height: 20),
+                        SizedBox(height: verticalSpacing),
                         SemesterCard(
                           semester: result.semester2,
                           columns: columns,
@@ -93,7 +108,7 @@ class _ResultScreenState extends State<ResultScreen> {
                             });
                           },
                         ),
-                        const SizedBox(height: 20),
+                        SizedBox(height: verticalSpacing),
                         SemesterCard(
                           semester: result.semester1,
                           columns: columns,
