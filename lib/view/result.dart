@@ -25,20 +25,21 @@ class _ResultScreenState extends State<ResultScreen> {
   /// 600-1000: tablet
   /// > 1000  : desktop/web
   int _columnsForWidth(double width) {
-    if (width < 600) return 2;
-    if (width < 1000) return 3;
-    return 4;
+    const minCardWidth = 180.0;
+
+    return (width / minCardWidth).floor().clamp(1, 4);
   }
 
   double _aspectRatioForColumns(int columns) {
-    // Narrower columns need a taller card so text doesn't clip.
     switch (columns) {
+      case 1:
+        return 2.0; // wide card
       case 2:
-        return 0.90;
+        return 0.75;
       case 3:
-        return 0.95;
+        return 0.85;
       default:
-        return 1.05;
+        return 0.95;
     }
   }
 
