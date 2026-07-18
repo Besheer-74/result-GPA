@@ -18,6 +18,7 @@ class OverallResultCard extends StatelessWidget {
             : (constraints.maxWidth - (spacing * 2)) / 3;
 
         return Container(
+          width: double.infinity,
           padding: EdgeInsets.symmetric(
             horizontal: isCompact ? 16 : 20,
             vertical: isCompact ? 14 : 16,
@@ -28,6 +29,7 @@ class OverallResultCard extends StatelessWidget {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 'Overall result',
@@ -37,19 +39,18 @@ class OverallResultCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              Wrap(
+              Row(
                 spacing: spacing,
-                runSpacing: 14,
                 children: [
-                  SizedBox(
-                    width: itemWidth,
+                  Expanded(
                     child: _statBlock(
                       '${GradeCalculator.overallGpa(result).toStringAsFixed(2)}',
                       'GPA',
                     ),
                   ),
-                  SizedBox(
-                    width: itemWidth,
+                  const SizedBox(width: 12),
+
+                  Expanded(
                     child: _statBlock(
                       GradeCalculator.overallLetter(
                         GradeCalculator.overallGpa(result),
@@ -57,8 +58,9 @@ class OverallResultCard extends StatelessWidget {
                       'Grade',
                     ),
                   ),
-                  SizedBox(
-                    width: itemWidth,
+                  const SizedBox(width: 12),
+
+                  Expanded(
                     child: _statBlock(
                       '${result.semester1.totalCredits + result.semester2.totalCredits}',
                       'Credits',
@@ -77,20 +79,24 @@ class OverallResultCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: ColorsStyle.neoMintColor,
+        Center(
+          child: Text(
+            value,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: ColorsStyle.neoMintColor,
+            ),
           ),
         ),
         const SizedBox(height: 2),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.white.withOpacity(0.55),
+        Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.white.withOpacity(0.55),
+            ),
           ),
         ),
       ],
